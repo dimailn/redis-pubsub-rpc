@@ -50,7 +50,7 @@ module.exports = class Server extends EventEmitter
     @subClient.subscribe("rpc:#{@options.applicationName}:request:#{@serverId}")
 
 
-  getServerId: -> @uuid
+  getServerId: -> @serverId
 
   addHandler: (methodName, handler) ->
     @handlers[methodName] = handler
