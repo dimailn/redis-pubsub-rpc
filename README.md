@@ -34,7 +34,7 @@ client.call('string.uppercase', ['text']).then(console.log) // Prints 'TEXT'
 
 ```
 
-You can also specify serverId and communicate with many servers in one application
+You may also specify serverId and communicate with many servers in one application
 
 ```javascript
 // create server with id
@@ -47,6 +47,12 @@ server = new Server('127.0.0.1:6379', {
 
 client.call('string.uppercase', ['text'], 'worker-0')
 
+```
+
+If you need to remove handler
+
+```javascript
+server.removeHandler('string.uppercase')
 ```
 
 
