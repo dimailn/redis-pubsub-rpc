@@ -16,7 +16,7 @@ Register handler in server application
 
 import {Server} from 'redis-pubsub-rpc'
 
-server = new Server('127.0.0.1:6379')
+const server = new Server('127.0.0.1:6379')
 
 server.addHandler('string.uppercase', (message) => message.toUpperCase())
 
