@@ -1,8 +1,9 @@
 {
   "name": "redis-pubsub-rpc",
   "version": "1.0.2",
-  "description": "",
+  "description": "This library provide lightweight RPC layer over Redis Pub/Sub.",
   "main": "lib/index.js",
+  "repository": "https://github.com/dimailn/redis-pubsub-rpc",
   "scripts": {
     "build": "coffee -o lib/ -c src/",
     "pub": "npm run build && npm publish",
