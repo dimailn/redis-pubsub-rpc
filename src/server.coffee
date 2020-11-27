@@ -57,3 +57,11 @@ module.exports = class Server extends EventEmitter
 
   removeHandler: (methodName) ->
     @handlers[methodName] = undefined
+
+  quit: ->
+    Promise.all(
+      [
+        @pubClient.quit()
+        @subClient.quit()
+      ]
+    )

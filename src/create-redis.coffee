@@ -5,7 +5,7 @@ module.exports = (url) ->
   client = redis.createClient(url)
 
   OPERATIONS = [
-    'set', 'get', 'setex', 'keys', 'del', 'mget', 'mset', 'on', 'subscribe', 'publish'
+    'set', 'get', 'setex', 'keys', 'del', 'mget', 'mset', 'on', 'subscribe', 'publish', 'unsubscribe', 'quit'
   ]
 
   async = {}

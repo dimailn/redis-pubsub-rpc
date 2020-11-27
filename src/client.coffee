@@ -60,3 +60,10 @@ module.exports = class Client extends EventEmitter
 
     promise
 
+  quit: =>
+    Promise.all(
+      [
+        @pubClient.quit()
+        @subClient.quit()
+      ]
+    )
