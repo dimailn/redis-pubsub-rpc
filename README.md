@@ -63,7 +63,7 @@ If you need to remove handler
 server.removeHandler('string.uppercase')
 ```
 
-To shutdown client and server call method ```quit```
+To shutdown client and server call method ```quit()```
 
 ```javascript
 
