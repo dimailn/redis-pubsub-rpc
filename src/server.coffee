@@ -13,7 +13,7 @@ module.exports = class Server extends EventEmitter
 
     @handlers = {}
 
-    @serverId = @options.serverId || uuid.v4()
+    @serverId = @options.serverId || 'main'
 
     @subClient.on('message', (channel, message) =>
       message = JSON.parse(message)
