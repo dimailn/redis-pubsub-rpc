@@ -1,6 +1,6 @@
 # redis-pubsub-rpc
 
-[![Build Status](https://img.shields.io/github/workflow/status/dimailn/redis-pubsub-rpc/CI)](https://img.shields.io/github/workflow/status/dimailn/redis-pubsub-rpc/CI)
+[![Build Status](https://img.shields.io/github/workflow/status/dimailn/redis-pubsub-rpc/CI?kill_cache=1)](https://img.shields.io/github/workflow/status/dimailn/redis-pubsub-rpc/CI)
 
 
 This library provide lightweight RPC layer over Redis Pub/Sub.
