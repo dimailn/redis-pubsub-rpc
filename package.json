@@ -1,6 +1,6 @@
 {
   "name": "redis-pubsub-rpc",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "This library provide lightweight RPC layer over Redis Pub/Sub.",
   "main": "lib/index.js",
   "repository": "https://github.com/dimailn/redis-pubsub-rpc",
