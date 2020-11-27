@@ -22,17 +22,12 @@ jobs:
 
     container: node:12.20-alpine
 
-    # services:
-    #   # Label used to access the service container
-    #   redis:
-    #     # Docker Hub image
-    #     image: redis
-    #     # Set health checks to wait until redis has started
-    #     options: >-
-    #       --health-cmd "redis-cli ping"
-    #       --health-interval 10s
-    #       --health-timeout 5s
-    #       --health-retries 5
+    services:
+      redis:
+        image: redis
+        ports:
+        - 6379:6379
+        options: --entrypoint redis-server
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -57,5 +52,5 @@ jobs:
           # The hostname used to communicate with the Redis service container
           REDIS_HOST: redis
           # The default Redis port
-          REDIS_PORT: 6379
+          REDIS_PORT:  ${{ job.services.redis.ports[6379] }}
 
