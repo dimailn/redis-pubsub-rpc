@@ -31,6 +31,8 @@ describe 'redis-pubsub-rpc', ->
 
     expect(result).toBe 'TEXT'
 
+    expect(server.getServerId()).toBe 'worker-0'
+
     expect(client.call('string.uppercase', ['text'])).rejects.toEqual(new Error('RPC request timeout'))
 
     await client.quit()
@@ -57,5 +59,35 @@ describe 'redis-pubsub-rpc', ->
 
 
 
+  test 'remote call throws', ->
+    server = new Server("redis://#{REDIS_HOST}:#{REDIS_PORT}", applicationName: 'test')
+
+    server.addHandler('string.uppercase', (message) => throw new Error("Something error"))
+
+    client = new Client("redis://#{REDIS_HOST}:#{REDIS_PORT}", applicationName: 'test')
+
+    expect(client.call('string.uppercase', ['text'])).rejects.toEqual("Something error")
+
+    await client.quit()
+    await server.quit()
+
+  test 'method not found', ->
+    server = new Server("redis://#{REDIS_HOST}:#{REDIS_PORT}", applicationName: 'test')
+
+    client = new Client("redis://#{REDIS_HOST}:#{REDIS_PORT}", applicationName: 'test')
+
+    expect(client.call('string.uppercase', ['text'])).rejects.toEqual("Method not found")
+
+    await client.quit()
+    await server.quit()
+
+  test 'server and client terminates successfully', ->
+    server = new Server("redis://#{REDIS_HOST}:#{REDIS_PORT}", applicationName: 'test')
+
+    client = new Client("redis://#{REDIS_HOST}:#{REDIS_PORT}", applicationName: 'test')
+
+    await new Promise((resolve, reject) -> setTimeout(resolve, 2000))
+    expect(client.quit()).resolves.toBeDefined()
+    expect(server.quit()).resolves.toBeDefined()
 
   return
