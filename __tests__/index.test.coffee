@@ -90,4 +90,23 @@ describe 'redis-pubsub-rpc', ->
     expect(client.quit()).resolves.toBeDefined()
     expect(server.quit()).resolves.toBeDefined()
 
+
+  test 'circular dependency detected in return value', ->
+    server = new Server("redis://#{REDIS_HOST}:#{REDIS_PORT}")
+
+    server.addHandler('string.objectify', (message) =>
+      obj = {
+        message
+      }
+      obj.obj = obj
+      obj
+    )
+
+    client = new Client("redis://#{REDIS_HOST}:#{REDIS_PORT}")
+
+    expect(client.call('string.objectify', ['text'])).rejects.toEqual(new Error('Method string.objectify with params text returns object with circular dependency, serialization is not possible.'))
+
+    await client.quit()
+    await server.quit()
+
   return

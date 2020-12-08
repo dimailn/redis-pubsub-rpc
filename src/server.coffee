@@ -1,6 +1,7 @@
 EventEmitter = require './event-emitter'
 uuid = require 'uuid'
 createRedis = require './create-redis'
+isCircular = require 'is-circular'
 
 module.exports = class Server extends EventEmitter
   constructor: (@redisUrl, @options = {}) ->
@@ -27,10 +28,17 @@ module.exports = class Server extends EventEmitter
           try
             result = handler(...params)
             result = await result if result instanceof Promise
-            {
-              result
-              uuid
-            }
+
+            if typeof result is 'object' && isCircular(result)
+              {
+                error: "Method #{methodName} with params #{params} returns object with circular dependency, serialization is not possible."
+                uuid
+              }
+            else
+              {
+                result
+                uuid
+              }
           catch error
             {
               error: error.message
