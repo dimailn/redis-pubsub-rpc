@@ -40,7 +40,6 @@ module.exports = class Server extends EventEmitter
                 uuid
               }
           catch error
-            console.log error
             {
               uuid
               error: try
