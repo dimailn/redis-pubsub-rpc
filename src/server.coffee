@@ -43,7 +43,7 @@ module.exports = class Server extends EventEmitter
             {
               uuid
               error: try
-                JSON.stringify(error, Object.getOwnPropertyNames(error))
+                JSON.stringify(error)
               catch e
                 throw e unless e.message.includes('Converting circular structure to JSON')
                 error.message
