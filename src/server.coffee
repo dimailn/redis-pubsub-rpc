@@ -41,7 +41,7 @@ module.exports = class Server extends EventEmitter
               }
           catch error
             {
-              error: if isCircular(error) then error.message else JSON.stringify(error)
+              error: if isCircular(error) then error.message else JSON.stringify(error, Object.getOwnPropertyNames(error))
               uuid
             }
         else
