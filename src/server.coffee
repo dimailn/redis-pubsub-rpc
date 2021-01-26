@@ -40,9 +40,14 @@ module.exports = class Server extends EventEmitter
                 uuid
               }
           catch error
+            console.log error
             {
-              error: if isCircular(error) then error.message else JSON.stringify(error, Object.getOwnPropertyNames(error))
               uuid
+              error: try
+                JSON.stringify(error, Object.getOwnPropertyNames(error))
+              catch e
+                throw e unless e.message.includes('Converting circular structure to JSON')
+                error.message
             }
         else
           {
